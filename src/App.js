@@ -22,15 +22,6 @@ function App () {
     service.start();
   });
 
-
-  const restartMachine = (event) => {
-    service = interpret(toggle);
-
-    setBulbOn(false);
-    console.log('restarting');
-  }
-
-  console.log(bulbOn);
   return (
     <div className="App">
       <LightBulb checked={bulbOn} />
