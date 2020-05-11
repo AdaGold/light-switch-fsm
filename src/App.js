@@ -1,24 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import LightBulb from './components/LightBulb'
+import { interpret } from 'xstate';
+import { toggle, service } from './state-machines/Toggle-Machine';
 import './App.css';
 
-function App() {
+function App () {
+  const [bulbOn, setBulbOn] = useState(false);
+  useEffect(() => {
+    service.onTransition(state => {
+      console.log('Transitioning', state);
+      switch (state.value) {
+        case 'on': setBulbOn(true);
+          break;
+        case 'off': setBulbOn(false);
+          break;
+        case 'broken': setBulbOn(false);
+          break;
+        default:
+      }
+    });
+    service.start();
+  });
+
+
+  const restartMachine = (event) => {
+    service = interpret(toggle);
+
+    setBulbOn(false);
+    console.log('restarting');
+  }
+
+  console.log(bulbOn);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LightBulb checked={bulbOn} />
+      <section>
+        <button onClick={() => service.send('toggle')} >Turn {bulbOn ? 'Off' : 'On'}</button>
+        <button onClick={() => service.send('break')} >Break Bulb</button>
+      </section>
     </div>
   );
 }
