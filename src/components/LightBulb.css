@@ -1,0 +1,76 @@
+#bulb {
+  width: 15%;
+  margin-left: 43%;
+  margin-top: 20px; 
+}
+.filament {
+  transition: all 0.2s ease;
+}
+.cls-5 {
+  transition: all 1s ease;
+}
+.filament-checked {
+  background: red;
+  fill: red;
+}
+
+.filament {
+  fill: 6d6e71;
+}
+#bulb .cls-4 .cls-5-checked {
+  fill: #FFF9A3;
+}
+
+#toggle:checked ~ #bulb .cls-5 {
+  fill: #FFF9A3;
+}
+.prong {
+  fill: #6d6e71;
+}
+.cls-2 {
+  fill: #808285;
+}
+.cls-3 {
+  fill: #939598;
+}
+.cls-4 {
+  opacity: 0.51;
+}
+.cls-5-unchecked {
+  fill: #d1d3d4;
+}
+#toggle {
+  position: absolute;
+  appearance: none;
+  cursor: pointer;
+  left: -100%;
+  top: -100%;
+}
+#toggle + label {
+  font-family: sans-serif;
+  position: absolute;
+  cursor: pointer;
+  width: 60px;
+  height: 100px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 26px 10px;
+  font-size: 15px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  transition: all 500ms ease;
+  border: 2px solid black;
+  border-bottom: 30px solid black;
+}
+#toggle + label:after {
+  content: "OFF"
+}
+#toggle:checked + label {
+  border-top: 30px solid black;
+  border-bottom: 3px solid black;
+}
+#toggle:checked + label:after {
+  content: "ON"
+}
